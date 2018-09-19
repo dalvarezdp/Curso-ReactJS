@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import ConditionalSection from "./sections/conditional";
 import cars from "./data/cars.json";
+import Forms from "./sections/forms";
 
 // function Hello(props) {
 //   return <h1 className="App-title">{props.title}</h1>;
@@ -104,6 +105,22 @@ class CarItem extends Component {
 }
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = { mouseX: 0, mouseY: 0 };
+  }
+
+  handleMouseMove = (e) => {
+    const {clientX, clientY} = e
+    this.setState({ mouseX: clientX, mouseY: clientY })
+  }
+
+  handleClick(e) {
+    console.log(e);
+    console.log(e.nativeEvent);
+    alert('Hi here!');
+  }
+
   render() {
     const numbers = [1, 1, 3, 4, 5];
 
@@ -135,7 +152,17 @@ class App extends Component {
             return <CarItem id={car.id} key={car.id} car={car} />;
           })}
         </ul>
+        <h4>Ejemplo de onClick</h4>
+        <button onClick={this.handleClick}>Hi there!</button>
+        <div
+          onMouseMove={this.handleMouseMove}
+          style={{ border: '1px solid #000', marginTop: 10, padding: 10 }}>
+          <p>{this.state.mouseX}, {this.state.mouseY}</p>
+        </div>
+        <br></br>
+        <Forms></Forms>
       </div>
+
     );
   }
 }
